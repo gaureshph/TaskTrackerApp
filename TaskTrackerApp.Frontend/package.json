@@ -1,0 +1,23 @@
+{
+  "name": "task-tracker-app",
+  "version": "1.0.0",
+  "description": "A minimal app to keep track of my daily and weekly goals",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaureshph/TaskTrackerApp.git"
+  },
+  "keywords": [
+    "todolist",
+    "tasktracker"
+  ],
+  "author": "Gouresh Phadke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gaureshph/TaskTrackerApp/issues"
+  },
+  "homepage": "https://github.com/gaureshph/TaskTrackerApp#readme"
+}
