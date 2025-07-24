@@ -137,3 +137,7 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+TaskTrackerApp.Backend/TaskTracker.API/obj
+TaskTrackerApp.Backend/TaskTracker.Repository/obj
+TaskTrackerApp.Backend/TaskTracker.API/bin
+TaskTrackerApp.Backend/TaskTracker.Repository/bin

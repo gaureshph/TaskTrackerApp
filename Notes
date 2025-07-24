@@ -1,0 +1,7 @@
+SQL Server Name:- task-tracker-app
+SQL Database Name:- TaskTrackerApp
+SQL SA User Id:- goureshp
+SQL SA User Password:- Gajanana@17
+
+The DB Scaffold Command was run using the below command
+dotnet ef dbcontext scaffold "Server=tcp:task-tracker-app.database.windows.net,1433;Initial Catalog=TaskTrackerApp;Persist Security Info=False;User ID=goureshp;Password=Gajanana@17;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" Microsoft.EntityFrameworkCore.SqlServer -o Models
