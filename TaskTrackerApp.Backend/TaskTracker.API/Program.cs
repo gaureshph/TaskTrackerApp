@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskTracker.Repository.DbContexts;
 using TaskTracker.Repository.Repositories;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,11 @@ var connectionString = "Server=tcp:task-tracker-app.database.windows.net,1433;In
 builder.Services.AddDbContext<TaskTrackerAppContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddScoped<ITasksRepository, TasksRepository>();
-builder.Services.AddControllers();
+builder.Services.AddScoped<IStatusesRepository, StatusesRepository>();
+builder.Services.AddScoped<ITagsRepository, TagsRepository>();
+builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

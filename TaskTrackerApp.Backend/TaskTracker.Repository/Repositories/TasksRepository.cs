@@ -17,4 +17,27 @@ public class TasksRepository : ITasksRepository
     {
         return await taskTrackerAppContext.Tasks.ToListAsync();
     }
+
+    public async Task<TaskEntry> GetTaskByIdAsync(int taskId)
+    {
+        return await taskTrackerAppContext.Tasks.FindAsync(taskId);
+    }
+
+    public async Task CreateTaskAsync(TaskEntry taskEntry)
+    {
+        await taskTrackerAppContext.Tasks.AddAsync(taskEntry);
+        await taskTrackerAppContext.SaveChangesAsync();
+    }
+
+    public async Task UpdateTaskAsync(TaskEntry taskEntry)
+    {
+        taskTrackerAppContext.Tasks.Attach(taskEntry);
+        await taskTrackerAppContext.SaveChangesAsync();
+    }
+
+    public async Task DeleteTaskAsync(TaskEntry taskEntry)
+    {
+        taskTrackerAppContext.Tasks.Remove(taskEntry);
+        await taskTrackerAppContext.SaveChangesAsync();
+    }    
 }
