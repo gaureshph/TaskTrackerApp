@@ -1,5 +1,4 @@
 using AutoMapper;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
 using TaskTracker.Repository.DbEntities;
@@ -81,7 +80,7 @@ public class TasksController : ControllerBase
     public async Task<IActionResult> UpdateStatus(int taskId, [FromBody] JsonPatchDocument<TaskUpdationDto> patchDoc)
     {
         if (patchDoc == null)
-        {            
+        {
             return BadRequest();
         }
 
@@ -92,12 +91,20 @@ public class TasksController : ControllerBase
             return NotFound();
         }
 
-        patchDoc.ApplyTo(taskEntry, ModelState);
+        var updationDto = mapper.Map<TaskEntry, TaskUpdationDto>(taskEntry);
+
+        patchDoc.ApplyTo(updationDto, error =>
+        {
+            var path = error.Operation?.path ?? "UnknownPath";
+            ModelState.AddModelError(path, error.ErrorMessage);
+        });
 
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
+
+        taskEntry = mapper.Map<TaskUpdationDto, TaskEntry>(updationDto);
 
         await tasksRepository.UpdateTaskAsync(taskEntry);
 
@@ -116,5 +123,5 @@ public class TasksController : ControllerBase
         await tasksRepository.DeleteTaskAsync(taskEntry);
 
         return NoContent();
-    }    
+    }
 }

@@ -1,5 +1,4 @@
 using AutoMapper;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TaskTracker.Repository.DbEntities;
 using TaskTracker.Repository.Repositories;
