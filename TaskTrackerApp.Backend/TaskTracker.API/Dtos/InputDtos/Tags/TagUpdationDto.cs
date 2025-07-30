@@ -1,6 +1,6 @@
 namespace TaskTracker.API.Dtos.InputDtos.Tags;
 
-public class TagCreationDto
+public class TagUpdationDto
 {    
     public string Name { get; set; }
 }

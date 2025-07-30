@@ -1,8 +1,10 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
+import App from './Components/App';
+import Modal from 'react-modal';
 
-let component = <h1>I am react</h1>
+Modal.setAppElement('#root');
 
 let root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(component);
+
+root.render(<App />);

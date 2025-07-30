@@ -25,6 +25,7 @@ public class TagsRepository : ITagsRepository
 
     public async Task CreateTagAsync(Tag tag)
     {
+        taskTrackerAppContext.Entry(tag).Property(tag => tag.Id).IsTemporary = true;
         await taskTrackerAppContext.Tags.AddAsync(tag);
         await taskTrackerAppContext.SaveChangesAsync();
     }
@@ -33,5 +34,11 @@ public class TagsRepository : ITagsRepository
     {
         taskTrackerAppContext.Tags.Remove(tag);
         await taskTrackerAppContext.SaveChangesAsync();
-    }    
+    }
+
+    public async Task UpdateTagAsync(Tag tag)
+    {
+        taskTrackerAppContext.Tags.Attach(tag);
+        await taskTrackerAppContext.SaveChangesAsync();
+    }
 }

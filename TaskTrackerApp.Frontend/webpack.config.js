@@ -1,5 +1,25 @@
 const path = require("path");
+const fs = require("fs");
+const dotenv = require("dotenv");
+const webpack = require('webpack');
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const isDev = process.env.NODE_ENV !== 'production';
+
+let env = {};
+if (isDev && fs.existsSync('.env')) {
+  env = dotenv.config().parsed || {};
+}
+
+env = {
+  ...process.env,
+  ...env,
+};
+
+const appEnv = {
+  'process.env.API_BASE_URL': JSON.stringify(env.API_BASE_URL),
+};
 
 module.exports = {
   entry: "./src/index.js",
@@ -7,6 +27,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     clean: true,
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -28,11 +49,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
+    new webpack.DefinePlugin(appEnv),
   ],
   devServer: {
     static: "./dist",
     port: 3000,
     hot: true,
+    historyApiFallback: true,
   },
   mode: "development",
 };

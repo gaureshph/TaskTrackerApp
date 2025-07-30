@@ -1,7 +1,10 @@
-﻿namespace TaskTracker.Repository.DbEntities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TaskTracker.Repository.DbEntities;
 
 public partial class TaskEntry
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     public string Title { get; set; } = null!;

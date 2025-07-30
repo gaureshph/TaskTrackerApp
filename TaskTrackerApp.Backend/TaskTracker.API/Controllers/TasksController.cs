@@ -9,7 +9,7 @@ using TaskTracker.API.Dtos.OutputDtos.Tasks;
 namespace TaskTrackerApp.API.Controllers;
 
 [ApiController]
-[Route("tasks")]
+[Route("api/tasks")]
 public class TasksController : ControllerBase
 {
     private readonly IMapper mapper;

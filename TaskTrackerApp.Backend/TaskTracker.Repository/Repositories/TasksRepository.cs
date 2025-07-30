@@ -25,6 +25,7 @@ public class TasksRepository : ITasksRepository
 
     public async Task CreateTaskAsync(TaskEntry taskEntry)
     {
+        taskTrackerAppContext.Entry(taskEntry).Property(task => task.Id).IsTemporary = true;
         await taskTrackerAppContext.Tasks.AddAsync(taskEntry);
         await taskTrackerAppContext.SaveChangesAsync();
     }

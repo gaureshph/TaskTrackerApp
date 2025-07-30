@@ -8,7 +8,7 @@ using TaskTracker.API.Dtos.OutputDtos.Tags;
 namespace TaskTrackerApp.API.Controllers;
 
 [ApiController]
-[Route("tags")]
+[Route("api/tags")]
 public class TagsController : ControllerBase
 {
     private readonly IMapper mapper;
@@ -49,7 +49,23 @@ public class TagsController : ControllerBase
         var tag = mapper.Map<Tag>(tagCreationDto);
         await tagsRepository.CreateTagAsync(tag);
 
-        return CreatedAtAction("GetTagById", new { id = tag.Id }, tag);
+        return CreatedAtAction("GetTagById", new { tagId = tag.Id }, tag);
+    }
+
+    [HttpPut("{tagId}", Name = "EditTag")]
+    public async Task<IActionResult> EditTag(int tagId, [FromBody] TagUpdationDto tagUpdationDto)
+    {
+        var tag = await tagsRepository.GetTagByIdAsync(tagId);
+        if (tag == null)
+        {
+            return NotFound();
+        }
+
+        tag.Name = tagUpdationDto.Name;
+
+        await tagsRepository.UpdateTagAsync(tag);
+
+        return NoContent();
     }
 
     [HttpDelete("{tagId}", Name = "DeleteTag")]

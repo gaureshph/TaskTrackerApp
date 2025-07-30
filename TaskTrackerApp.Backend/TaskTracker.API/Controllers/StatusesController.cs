@@ -6,7 +6,7 @@ using TaskTracker.API.Dtos.OutputDtos.Statuses;
 namespace TaskTrackerApp.API.Controllers;
 
 [ApiController]
-[Route("statuses")]
+[Route("api/statuses")]
 public class StatusesController : ControllerBase
 {
     private readonly IMapper mapper;

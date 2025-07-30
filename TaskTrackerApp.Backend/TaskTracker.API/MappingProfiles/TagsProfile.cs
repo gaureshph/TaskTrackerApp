@@ -8,6 +8,6 @@ public class TagsProfile : Profile
     public TagsProfile()
     {
         CreateMap<Tag, TagDto>();
-        CreateMap<TagCreationDto, Tag>();
+        CreateMap<TagCreationDto, Tag>().ForMember(dest => dest.Id, opt => opt.Ignore());
     }
 }
